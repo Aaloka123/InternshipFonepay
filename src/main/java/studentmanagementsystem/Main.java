@@ -10,13 +10,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // ✅ STEP 1: Create repository (ONLY ONE)
+        // STEP 1: Create repository (ONLY ONE)
         StudentRepository repository = new StudentRepository();
 
-        // ✅ STEP 2: Pass repository to service
+        // STEP 2: Pass repository to service
         StudentService service = new StudentService(repository);
 
-        // ✅ STEP 3: Pass service to controller
+        //  STEP 3: Pass service to controller
         StudentController controller = new StudentController(service);
 
         Scanner sc = new Scanner(System.in);
@@ -28,7 +28,8 @@ public class Main {
             System.out.println("2. View All Students");
             System.out.println("3. Search Student");
             System.out.println("4. Delete Student");
-            System.out.println("5. Exit");
+            System.out.println("5. Update Students");
+            System.out.println("6. Exit");
             System.out.print("Enter choice: ");
 
             int choice = sc.nextInt();
@@ -72,6 +73,24 @@ public class Main {
                     break;
 
                 case 5:
+                    System.out.print("Enter ID: ");
+                    int updateId = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.print("Enter New Name: ");
+                    String newName = sc.nextLine();
+
+                    System.out.print("Enter New Age: ");
+                    int newAge = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.print("Enter New Grade: ");
+                    String newGrade = sc.nextLine();
+
+                    controller.updateStudent(updateId, newName, newAge, newGrade);
+                    break;
+
+                case 6:
                     System.out.println("Exiting system...");
                     return;
 

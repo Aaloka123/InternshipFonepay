@@ -27,4 +27,7 @@ public class StudentService {
     public boolean deleteStudent(int id) {
         return repository.deleteStudent(id);
     }
+    public boolean updateStudent(int id , String name ,int age,String grade){
+        return repository.updateStudent(id, name, age, grade);
+    }
 }
