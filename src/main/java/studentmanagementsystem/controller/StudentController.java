@@ -5,54 +5,46 @@ import studentmanagementsystem.services.StudentService;
 
 import java.util.List;
 
+// Controller handles communication between UI and Service
 public class StudentController {
+
     private StudentService service;
 
     public StudentController(StudentService service) {
         this.service = service;
     }
 
+    // ADD student
     public void addStudent(int id, String name, int age, String grade) {
         StudentModel student = new StudentModel(id, name, age, grade);
         service.addStudent(student);
-        System.out.println("Student added successfully");
     }
 
-    public void showAllStudents() {
-        List<StudentModel> students = service.getAllStudents();
-        for (StudentModel s : students) {
-            System.out.println(s);
-        }
+    // GET ALL students
+    public List<StudentModel> getAllStudents() {
+        return service.getAllStudents();
     }
 
-    public void searchStudent(int id) {
-        StudentModel student = service.getStudentById(id);
-
-        if (student != null) {
-            System.out.println(student);
-        } else {
-            System.out.println("Student not found");
-        }
+    // SEARCH student
+    public StudentModel searchStudent(int id) {
+        return service.getStudentById(id);
     }
 
-    public void deleteStudent(int id) {
-        boolean deleted = service.deleteStudent(id);
-
-        if (deleted) {
-            System.out.println("Student deleted successfully");
-        } else {
-            System.out.println("Student not found");
-        }
+    // DELETE student
+    public boolean deleteStudent(int id) {
+        return service.deleteStudent(id);
     }
 
-    public void updateStudent(int id, String name, int age, String grade) {
-
-        boolean updated = service.updateStudent(id, name, age, grade);
-
-        if (updated) {
-            System.out.println("Student updated successfully");
-        } else {
-            System.out.println("Student not found");
-        }
+    // UPDATE student
+    public boolean updateStudent(int id, String name, int age, String grade) {
+        return service.updateStudent(id, name, age, grade);
     }
+
+    // SORT METHODS
+
+    public List<StudentModel> sortById() {
+        return service.sortById();
+    }
+
+
 }
