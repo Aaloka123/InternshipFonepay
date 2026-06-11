@@ -2,50 +2,79 @@ package studentmanagementsystem.repository;
 
 import studentmanagementsystem.model.StudentModel;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class StudentRepository {
     //list of all the students in memory
-    private List<StudentModel> students = new ArrayList<>();
+    // private List<StudentModel> students = new ArrayList<>();
+
+    //Hash Map
+    private Map<Integer, StudentModel> students = new HashMap<>();
 
     // List of all added STUDENT
-    public void addStudent(StudentModel student) {
-        students.add(student);
+    //public void addStudent(StudentModel student) {
+    // students.add(student);
+    //}
+
+    //Add using Hash Map
+    public void addStudent(StudentModel student){
+        students.put(student.getId(), student);
     }
 
     // GET ALL STUDENTS
     public List<StudentModel> getAllStudents() {
-        return students;
+        return new ArrayList<>(students.values());
     }
 
     // FIND STUDENT BY ID
+    //public StudentModel findById(int id) {
+    //  for (StudentModel s : students) {
+    //     if (s.getId() == id) {
+    //        return s;
+    //   }
+    //}
+    //return null;
+    //}
+
+    //Using HashMap
     public StudentModel findById(int id) {
-        for (StudentModel s : students) {
-            if (s.getId() == id) {
-                return s;
-            }
-        }
-        return null;
+        return students.get(id);
     }
 
     // DELETE STUDENT
+    //public boolean deleteStudent(int id) {
+    //  return students.removeIf(s -> s.getId() == id);
+    //}
+
+    //Using HashMap
     public boolean deleteStudent(int id) {
-        return students.removeIf(s -> s.getId() == id);
+        return students.remove(id) != null;
     }
 
     // UPDATE STUDENT
+//    public boolean updateStudent(int id, String name, int age, String grade) {
+//        for (StudentModel s : students) {
+//            if (s.getId() == id) {
+//                s.setName(name);
+//                s.setAge(age);
+//                s.setGrade(grade);
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
+    //Using HashMap
     public boolean updateStudent(int id, String name, int age, String grade) {
-        for (StudentModel s : students) {
-            if (s.getId() == id) {
-                s.setName(name);
-                s.setAge(age);
-                s.setGrade(grade);
-                return true;
-            }
+        StudentModel student = students.get(id);
+
+        if(student != null){
+            student.setName(name);
+            student.setAge(age);
+            student.setGrade(grade);
+            return true;
         }
+
         return false;
     }
 
@@ -53,43 +82,49 @@ public class StudentRepository {
     //Sort by ID
     //Collection Utilities
     public List<StudentModel> sortById(){
-        Collections.sort(students, Comparator.comparing(StudentModel::getId));
-        return students;
+        List<StudentModel> list = new ArrayList<>(students.values());
+        list.sort(Comparator.comparing(StudentModel::getId));
+        return list;
     }
 
     public List<StudentModel> sortByName(){
-        Collections.sort(students, Comparator.comparing(StudentModel::getName));
-        return students;
+        List<StudentModel> list = new ArrayList<>(students.values());
+        list.sort(Comparator.comparing(StudentModel::getName));
+        return list;
     }
 
     public List<StudentModel> sortByAge(){
-        Collections.sort(students, Comparator.comparing(StudentModel::getAge));
-        return students;
+        List<StudentModel> list = new ArrayList<>(students.values());
+        list.sort(Comparator.comparing(StudentModel::getAge));
+        return list;
     }
 
     //Reverse
     public List<StudentModel> reverseStudents(){
-        Collections.reverse(students);
-        return students;
+        List<StudentModel> list = new ArrayList<>(students.values());
+        Collections.reverse(list);
+        return list;
     }
 
     //Shuffle
     public List<StudentModel> shuffleStudents(){
-        Collections.shuffle(students);
-        return new ArrayList<>(students);
+        List<StudentModel> list = new ArrayList<>(students.values());
+        Collections.shuffle(list);
+        return list;
     }
 
     // GET YOUNGEST STUDENT (was wrongly named before)
     public StudentModel getYoungestStudent(){
         return Collections.min(
-                students,
+                students.values(),
                 Comparator.comparing(StudentModel::getAge)
         );
     }
+
     public StudentModel getOldestStudent() {
         return Collections.max(
-                students,
+                students.values(),
                 Comparator.comparing(StudentModel::getAge)
         );
     }
-    }
+}
