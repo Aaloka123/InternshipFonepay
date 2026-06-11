@@ -51,11 +51,24 @@ public class MenuHandler {
                 case 6:
                     sortStudents();
                     break;
+
                 case 7:
                     reverseStudents();
                     break;
 
                 case 8:
+                    shuffleStudents();
+                    break;
+
+                case 9:
+                    showYoungestStudent();
+                    break;
+
+                case 10:
+                    showOldestStudent();
+                    break;
+
+                case 11:
                     System.out.println("Exiting system...");
                     return;
 
@@ -75,7 +88,10 @@ public class MenuHandler {
         System.out.println("5. Update Student");
         System.out.println("6. Sort Students");
         System.out.println("7. Reverse Students List");
-        System.out.println("8. Exit");
+        System.out.println("8. Shuffle Students");
+        System.out.println("9. Show Youngest Student");
+        System.out.println("10. Show Oldest Student");
+        System.out.println("11. Exit");
         System.out.print("Enter choice: ");
     }
 
@@ -104,7 +120,7 @@ public class MenuHandler {
         display(controller.getAllStudents());
     }
 
-    // SEARCH
+    // SEARCH STUDENT
     private void searchStudent() {
         System.out.print("Enter ID: ");
         int id = sc.nextInt();
@@ -112,14 +128,14 @@ public class MenuHandler {
         System.out.println(controller.searchStudent(id));
     }
 
-    // DELETE
+    // DELETE STUDENT
     private void deleteStudent() {
         System.out.print("Enter ID: ");
         int id = sc.nextInt();
         controller.deleteStudent(id);
     }
 
-    // UPDATE
+    // UPDATE STUDENT
     private void updateStudent() {
 
         System.out.print("Enter ID: ");
@@ -173,22 +189,61 @@ public class MenuHandler {
 
         display(sortedList);
     }
-    //Reverse Student list
-    private void reverseStudents(){
-        List<StudentModel> reverseList=controller.reverseStudents();
 
-        display(reverseList);
+    // REVERSE STUDENT LIST
+    private void reverseStudents() {
+        List<StudentModel> reversedList = controller.reverseStudents();
+        display(reversedList);
     }
 
+    // SHUFFLE STUDENTS
+    private void shuffleStudents() {
+        List<StudentModel> shuffledList = controller.shuffleStudents();
+        display(shuffledList);
+    }
 
-    // DISPLAY TABLE FORMAT (IMPROVED)
+    // SHOW YOUNGEST STUDENT
+    private void showYoungestStudent() {
+
+        StudentModel youngest = controller.getYoungestStudent();
+
+        System.out.println("\nYoungest Student:");
+        System.out.println("+----------+----------------------+-----+--------+");
+        System.out.printf("| %-8s | %-20s | %-3s | %-6s |\n",
+                "ID", "Name", "Age", "Grade");
+        System.out.println("+----------+----------------------+-----+--------+");
+
+        System.out.printf("| %-8d | %-20s | %-3d | %-6s |\n",
+                youngest.getId(),
+                youngest.getName(),
+                youngest.getAge(),
+                youngest.getGrade());
+
+        System.out.println("+----------+----------------------+-----+--------+");
+    }
+
+    // SHOW OLDEST STUDENT
+    private void showOldestStudent() {
+
+        StudentModel oldest = controller.getOldestStudent();
+
+        System.out.println("\nOldest Student:");
+        System.out.println("+----------+----------------------+-----+--------+");
+        System.out.printf("| %-8s | %-20s | %-3s | %-6s |\n",
+                "ID", "Name", "Age", "Grade");
+        System.out.println("+----------+----------------------+-----+--------+");
+
+        System.out.printf("| %-8d | %-20s | %-3d | %-6s |\n",
+                oldest.getId(),
+                oldest.getName(),
+                oldest.getAge(),
+                oldest.getGrade());
+
+        System.out.println("+----------+----------------------+-----+--------+");
+    }
+
+    // DISPLAY TABLE FORMAT
     private void display(List<StudentModel> students) {
-
-        // Increased column widths
-        int idW = 8;
-        int nameW = 20;
-        int ageW = 5;
-        int gradeW = 8;
 
         System.out.println("\n+----------+----------------------+-----+--------+");
 

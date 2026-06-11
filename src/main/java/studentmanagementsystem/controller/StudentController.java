@@ -42,7 +42,7 @@ public class StudentController {
 
     // SORT METHODS
 
-    // SORT METHODS
+    /// SORT METHODS
 
     public List<StudentModel> sortById() {
         return service.sortById();
@@ -55,10 +55,19 @@ public class StudentController {
     public List<StudentModel> sortByAge() {
         return service.sortByAge();
     }
+
     public List<StudentModel> reverseStudents(){
         return service.reverseStudents();
     }
 
+    public List<StudentModel> shuffleStudents(){
+        return service.shuffleStudents();
+    }
 
-
-}
+    // GET YOUNGEST STUDENT
+    public StudentModel getYoungestStudent(){
+        return service.getYoungestStudent();
+    }
+    public StudentModel getOldestStudent() {
+        return service.getOldestStudent();
+    }}

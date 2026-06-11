@@ -1,13 +1,14 @@
 package studentmanagementsystem.repository;
 
 import studentmanagementsystem.model.StudentModel;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 public class StudentRepository {
-//list of all the students in memory
+    //list of all the students in memory
     private List<StudentModel> students = new ArrayList<>();
 
     // List of all added STUDENT
@@ -47,24 +48,48 @@ public class StudentRepository {
         }
         return false;
     }
+
     //Sort Feature
     //Sort by ID
     //Collection Utilities
     public List<StudentModel> sortById(){
-        Collections.sort(students,Comparator.comparing(StudentModel::getId));
+        Collections.sort(students, Comparator.comparing(StudentModel::getId));
         return students;
     }
+
     public List<StudentModel> sortByName(){
-        Collections.sort(students , Comparator.comparing(StudentModel::getName));
+        Collections.sort(students, Comparator.comparing(StudentModel::getName));
         return students;
     }
+
     public List<StudentModel> sortByAge(){
-        Collections.sort(students , Comparator.comparing(StudentModel::getAge));
+        Collections.sort(students, Comparator.comparing(StudentModel::getAge));
         return students;
     }
+
     //Reverse
     public List<StudentModel> reverseStudents(){
         Collections.reverse(students);
         return students;
     }
-}
+
+    //Shuffle
+    public List<StudentModel> shuffleStudents(){
+        Collections.shuffle(students);
+        return new ArrayList<>(students);
+    }
+
+    // GET YOUNGEST STUDENT (was wrongly named before)
+    public StudentModel getYoungestStudent(){
+        return Collections.min(
+                students,
+                Comparator.comparing(StudentModel::getAge)
+        );
+    }
+    public StudentModel getOldestStudent() {
+        return Collections.max(
+                students,
+                Comparator.comparing(StudentModel::getAge)
+        );
+    }
+    }
