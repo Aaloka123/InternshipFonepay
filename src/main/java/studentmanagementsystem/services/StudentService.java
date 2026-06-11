@@ -45,6 +45,9 @@ public class StudentService {
     public List<StudentModel> sortById() {
         return repository.sortById();
     }
+    public  List<StudentModel> sortByName(){return repository.sortByName();}
+    public  List<StudentModel> sortByAge(){return repository.sortByAge();}
+
 
 
 }

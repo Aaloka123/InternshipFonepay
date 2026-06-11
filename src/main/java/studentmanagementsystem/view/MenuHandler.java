@@ -154,6 +154,14 @@ public class MenuHandler {
                 sortedList = controller.sortById();
                 break;
 
+            case 2:
+                sortedList = controller.sortByName();
+                break;
+
+            case 3:
+                sortedList = controller.sortByAge();
+                break;
+
             default:
                 System.out.println("Invalid choice!");
                 return;

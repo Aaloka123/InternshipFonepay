@@ -42,9 +42,20 @@ public class StudentController {
 
     // SORT METHODS
 
+    // SORT METHODS
+
     public List<StudentModel> sortById() {
         return service.sortById();
     }
+
+    public List<StudentModel> sortByName() {
+        return service.sortByName();
+    }
+
+    public List<StudentModel> sortByAge() {
+        return service.sortByAge();
+    }
+
 
 
 }

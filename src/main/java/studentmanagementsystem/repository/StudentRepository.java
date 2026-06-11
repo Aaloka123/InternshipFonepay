@@ -2,6 +2,7 @@ package studentmanagementsystem.repository;
 
 import studentmanagementsystem.model.StudentModel;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -48,8 +49,17 @@ public class StudentRepository {
     }
     //Sort Feature
     //Sort by ID
+    //Collection Utilities
     public List<StudentModel> sortById(){
-        students.sort(Comparator.comparing(StudentModel::getId));
+        Collections.sort(students,Comparator.comparing(StudentModel::getId));
+        return students;
+    }
+    public List<StudentModel> sortByName(){
+        Collections.sort(students , Comparator.comparing(StudentModel::getName));
+        return students;
+    }
+    public List<StudentModel> sortByAge(){
+        Collections.sort(students , Comparator.comparing(StudentModel::getAge));
         return students;
     }
 }
