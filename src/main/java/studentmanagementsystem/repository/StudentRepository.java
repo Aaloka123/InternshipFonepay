@@ -62,4 +62,9 @@ public class StudentRepository {
         Collections.sort(students , Comparator.comparing(StudentModel::getAge));
         return students;
     }
+    //Reverse
+    public List<StudentModel> reverseStudents(){
+        Collections.reverse(students);
+        return students;
+    }
 }

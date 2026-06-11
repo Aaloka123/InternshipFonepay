@@ -55,6 +55,9 @@ public class StudentController {
     public List<StudentModel> sortByAge() {
         return service.sortByAge();
     }
+    public List<StudentModel> reverseStudents(){
+        return service.reverseStudents();
+    }
 
 
 

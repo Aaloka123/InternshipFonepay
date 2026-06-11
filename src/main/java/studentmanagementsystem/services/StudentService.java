@@ -47,6 +47,9 @@ public class StudentService {
     }
     public  List<StudentModel> sortByName(){return repository.sortByName();}
     public  List<StudentModel> sortByAge(){return repository.sortByAge();}
+    public List<StudentModel> reverseStudents(){
+        return repository.reverseStudents();
+    }
 
 
 

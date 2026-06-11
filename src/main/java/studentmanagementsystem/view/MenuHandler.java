@@ -51,8 +51,11 @@ public class MenuHandler {
                 case 6:
                     sortStudents();
                     break;
-
                 case 7:
+                    reverseStudents();
+                    break;
+
+                case 8:
                     System.out.println("Exiting system...");
                     return;
 
@@ -71,7 +74,8 @@ public class MenuHandler {
         System.out.println("4. Delete Student");
         System.out.println("5. Update Student");
         System.out.println("6. Sort Students");
-        System.out.println("7. Exit");
+        System.out.println("7. Reverse Students List");
+        System.out.println("8. Exit");
         System.out.print("Enter choice: ");
     }
 
@@ -169,6 +173,13 @@ public class MenuHandler {
 
         display(sortedList);
     }
+    //Reverse Student list
+    private void reverseStudents(){
+        List<StudentModel> reverseList=controller.reverseStudents();
+
+        display(reverseList);
+    }
+
 
     // DISPLAY TABLE FORMAT (IMPROVED)
     private void display(List<StudentModel> students) {
