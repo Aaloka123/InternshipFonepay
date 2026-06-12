@@ -6,92 +6,49 @@ import java.util.*;
 
 public class StudentRepository {
 
-    // Main storage using HashMap (ID Student)
-    // HashMap provides fast O(1) average operations for insert, search, delete
+    // Main storage using HashMap (ID -> Student)
+    // Provides O(1) average time for insert, search, update, and delete
     private Map<Integer, StudentModel> students = new HashMap<>();
 
 
-    // Add new student with duplicate ID check
+    // Store a student in the repository
     public void addStudent(StudentModel student) {
-
-        // Prevent duplicate IDs
-        if (students.containsKey(student.getId())) {
-            System.out.println("Duplicate ID not allowed");
-            return;
-        }
-
-        // Insert student into map
         students.put(student.getId(), student);
-
-        System.out.println("Student added successfully:" + student.getName());
     }
 
 
-    // Get all students as a list
+    // Return all students as a List
     public List<StudentModel> getAllStudents() {
-
-        // Convert Map values into List for easy display/sorting
         return new ArrayList<>(students.values());
     }
 
 
-    // Find student by ID
+    // Find a student by ID
     public StudentModel findById(int id) {
-
-        // Direct lookup in HashMap (O(1) average time)
         return students.get(id);
     }
 
 
-    // Delete student by ID
-//    public boolean deleteStudent(int id) {
-//
-//        // remove() returns removed object or null
-//        StudentModel removed = students.remove(id);
-//
-//        return removed != null;
-//    }
-
-    // Delete student by ID (UPDATED HANDLING)
+    // Delete a student by ID
+    // Returns true if deletion succeeds
     public boolean deleteStudent(int id) {
-
-        // Step 1: Check if student exists
-        StudentModel student = students.get(id);
-
-        if (student == null) {
-            System.out.println("No student Found with ID:" + id);
-            return false;   // IMPORTANT FIX
-        }
-
-        // Step 2 :Remove Student
-        students.remove(id);
-
-        // Step 3 Confirmation message
-        System.out.println("Deleted student:" + student.getName());
-
-        return true;
+        return students.remove(id) != null;
     }
 
 
     // Update student details
+    // Returns false if student does not exist
     public boolean updateStudent(int id, String name, int age, String grade) {
 
-        // Fetch student from map
         StudentModel student = students.get(id);
 
-        // If student does not exist
         if (student == null) {
-            System.out.println("No student Found with ID:" + id);
             return false;
         }
 
-        // Update existing object
         student.setName(name);
         student.setAge(age);
         student.setGrade(grade);
-
-        //Confirmation Message
-        System.out.println("Student updated Successfully:" + student.getName());
 
         return true;
     }
@@ -102,6 +59,7 @@ public class StudentRepository {
 
         List<StudentModel> list = new ArrayList<>(students.values());
         list.sort(Comparator.comparing(StudentModel::getId));
+
         return list;
     }
 
@@ -111,6 +69,7 @@ public class StudentRepository {
 
         List<StudentModel> list = new ArrayList<>(students.values());
         list.sort(Comparator.comparing(StudentModel::getName));
+
         return list;
     }
 
@@ -120,30 +79,37 @@ public class StudentRepository {
 
         List<StudentModel> list = new ArrayList<>(students.values());
         list.sort(Comparator.comparing(StudentModel::getAge));
+
         return list;
     }
 
 
-    // Reverse student list order
+    // Return students in reverse order
     public List<StudentModel> reverseStudents() {
 
         List<StudentModel> list = new ArrayList<>(students.values());
         Collections.reverse(list);
+
         return list;
     }
 
 
-    // Shuffle student list randomly
+    // Return students in random order
     public List<StudentModel> shuffleStudents() {
 
         List<StudentModel> list = new ArrayList<>(students.values());
         Collections.shuffle(list);
+
         return list;
     }
 
 
-    // Get youngest student
+    // Return the youngest student
     public StudentModel getYoungestStudent() {
+
+        if (students.isEmpty()) {
+            return null;
+        }
 
         return Collections.min(
                 students.values(),
@@ -152,8 +118,12 @@ public class StudentRepository {
     }
 
 
-    // Get oldest student
+    // Return the oldest student
     public StudentModel getOldestStudent() {
+
+        if (students.isEmpty()) {
+            return null;
+        }
 
         return Collections.max(
                 students.values(),
